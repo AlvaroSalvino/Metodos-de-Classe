@@ -1,24 +1,25 @@
-class Pessoa:
-    def __init__(self, nome=None, idade=None):
-        self.nome = nome
-        self.idade = idade
+from abc import ABC, abstractmethod
 
 
-    @classmethod
-    def criar_de_data_nascimento(cls, ano, mes, dia, nome):
-        print(cls)
-        idade = 2022 - ano
-        return cls(nome, idade)
-    
-    @staticmethod
-    def e_maior_idade(idade):
-        return idade >= 18
+class ControleRemoto(ABC):
+    @abstractmethod
+    def ligar(self):
+        pass
 
-# p = Pessoa("Guilherme", 28)
-# print(p.nome, p.idade)
+    @abstractmethod
+    def desligar(self):
+        pass
 
-p = Pessoa.criar_de_data_nascimento(1998, 4, 7, "Alvaro")
-print(p.nome, p.idade)
+class ControleTV(ControleRemoto):
+    def ligar(self):
+        print("Ligando TV...")
+        print("Ligado")
 
-print(Pessoa.e_maior_idade(18))
-print(Pessoa.e_maior_idade(8))
+    def desligar(self):
+        print("Desligando a TV...")
+        print("Desligado!")     
+
+
+controle = ControleTV()
+controle.ligar()
+controle.desligar()
